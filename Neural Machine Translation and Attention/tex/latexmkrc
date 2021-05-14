@@ -1,0 +1,14 @@
+@default_files = ("main.tex");   # Set the root tex file for the output document
+$pdf_mode = 1;                   # tex -> PDF
+$auto_rc_use = 1;                # Do not read further latexmkrc files
+$out_dir = "..";                 # Create output files in the assignment directory (assignment/)
+$warnings_as_errors = 1;         # Elevates warnings to errors.  Enforces cleaner code.
+$pdflatex = "pdflatex -halt-on-error -interaction=batchmode %O %S";
+                                 # Forces latexmk to stop and quit if it encounters an error
+$jobname = "Neural Machine Translation and Attention Module Suggested Readings"; # This is the name of the output PDF file
+$silent = 1;                     # For quieter output on the terminal.
+
+add_cus_dep('pytex','tex',0,'py2tex');
+sub py2tex {
+  system("./py2tex.py \"$_[0].pytex\" \"$_[0].tex\"");
+}
